@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>FlibbleBridge</display-name>
+    <servlet-name>FlibbleBridge</servlet-name>
+    <servlet-class>sg.edu.ntu.Flibble.FlibbleBridge</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FlibbleBridge</servlet-name>
+    <url-pattern>/FlibbleBridge</url-pattern>
+  </servlet-mapping>
 </web-app>
