@@ -9,5 +9,8 @@ public class Constant {
 		public static final String flickrExtras = "extras";
 		public static final String flickrPerPage = "per_page";
 		public static final String flickrPage = "page=1";
+		
+		public static final String appName = "Flibble";
+		
 	}
 }
