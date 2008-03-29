@@ -15,6 +15,7 @@ SelfNick   +-+  ||  +-+  EnemyNick
 }}}
 
 ----
-^1^ onload: {{{
+^1^ onload: 
+{{{
 show P3
 }}}
