@@ -1,0 +1,31 @@
+#summary Server side turns and client side turns
+#labels Phase-Implementation
+
+== Server's turn ==
+
+There are 4 turns:
+  * Aguess // A's turn to guess a pic
+  * Asend // A's turn to select a pic to send to B
+  * Bguess
+  * Bsend
+
+Transitions:
+
+{{{
+                    A++
+     +---------------------------------+
+     ↓                                |
+  Asend ---> Bguess ---> Bsend ---> Aguess
+     ↑         |   B++     ↑         |
+     +----------+           +----------+
+         wrong                 wrong
+}}}
+
+== Client's turn ==
+
+Client only see turns called meGuess, meSend, youGuess, and youSend, not A or B.
+
+=== Additional turn data ===
+
+  * meSend: imgSet, tagSet     -> send imgIndex 1..9 (which image to send)
+  * meGuess: imgGuess, tagSet  -> send tagIndex 1..9 (which tags is guessed)
