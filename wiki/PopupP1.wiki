@@ -1,0 +1,26 @@
+#summary Popup when user click Start Game
+
+=== Nickname ===
+(Form input text^1^)
+
+=== Join Table ===
+(Horizontal list of table with nicknames of other players)^2^
+
+=== or *Create a new Table*^3^ ===
+
+----
+
+^1^ Max length = 20, size = 12
+
+^2^ onclick: 
+{{{
+s = getSession(nick, tableId)
+goto page H2{sessionId: s}
+}}}
+
+
+^3^ onclick: 
+{{{
+s = getSession(nick, 0)
+goto page H2{sessionId: s}
+}}}
