@@ -29,3 +29,31 @@ Client only see turns called meGuess, meSend, youGuess, and youSend, not A or B.
 
   * meSend: imgSet, tagSet     -> send imgIndex 1..9 (which image to send)
   * meGuess: imgGuess, tagSet  -> send tagIndex 1..9 (which tags is guessed)
+
+  * imgSet: String url[9]
+  * tagSet: String[] tags[9]
+  * tags: String tag[9]
+
+example turn data: 
+{{{
+{
+  turn: "meSend",
+  imgSet: [
+    "http://flickr.com/whatever/1",
+    "http://flickr.com/whatever/2",
+    "http://flickr.com/whatever/3",
+    "http://flickr.com/whatever/4",
+    "http://flickr.com/whatever/5",
+    "http://flickr.com/whatever/6",
+    "http://flickr.com/whatever/7",
+    "http://flickr.com/whatever/8",
+    "http://flickr.com/whatever/9"
+  ],
+  tagSet: [
+    ["boy", "blue"],
+    ["sile", "jere"],
+    // etc
+    ["waku", "girl"]
+  ]
+}
+}}}
