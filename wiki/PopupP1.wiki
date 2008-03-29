@@ -1,7 +1,8 @@
 #summary Popup when user click Start Game
+#labels Phase-Design
 
 === Nickname ===
-(Form input text^1^)
+`[Form input text]`^1^
 
 === Join Table ===
 (Horizontal list of table with nicknames of other players)^2^
