@@ -1,0 +1,153 @@
+
+html, body {
+	background-color: #90968E;
+}
+
+#window-outer {
+	width: 100%;
+	margin-top: 8px;
+}
+
+#window {
+	width: 800px;
+	height: 600px;
+	margin: auto;
+	background-color: white;
+	position: relative;
+	border-right: 4px gray solid;
+	border-bottom: 4px gray solid;
+}
+
+.middlebar {
+	background-color: #dddddd;
+	width: 3px;
+	height: 580px;
+	position: absolute;
+	z-index: 2;
+}
+
+#middlebar1 {
+	left: 395px;
+	top: 10px;
+}
+
+#middlebar2 {
+	left: 402px;
+	top: 10px;
+}
+
+.square {
+	background-color: #ccccdd;
+	width:100px;
+	height:100px;
+	position: absolute;
+	z-index: 5;
+	vertical-align: middle;
+	text-align: center;
+}
+
+.row1 {
+	top: 230px;
+}
+
+.row2 {
+	top: 350px;
+}
+
+.row3 {
+	top: 470px;
+}
+
+.me .col1 {
+	left: 30px;
+}
+
+.me .col2 {
+	left: 150px;
+}
+
+.me .col3 {
+	left: 270px;
+}
+
+.you .col1 {
+	left: 430px;
+}
+
+.you .col2 {
+	left: 550px;
+}
+
+.you .col3 {
+	left: 670px;
+}
+
+.question {
+	top: 30px;
+}
+
+.me .question {
+	left: 30px;
+}
+
+.you .question {
+	left: 670px;
+}
+
+.hint {
+	position: absolute;
+	top: 140px;
+	width: 210px;
+	height: 50px;
+}
+
+.me .hint {
+	left: 30px;
+	text-align: left;
+}
+
+.you .hint {
+	right: 30px;
+	text-align: right;
+}
+
+.nick {
+	position: absolute;
+	top: 30px;
+	width: 200px;
+	height: 30px;
+	font-size: 24px;
+	font-weight: bold;
+	vertical-align: middle;
+}
+
+.me .nick {
+	left: 170px;
+	text-align: right;
+}
+
+.you .nick {
+	left: 430px;
+	text-align: left;
+}
+
+.score {
+	position: absolute;
+	top: 70px;
+	width: 120px;
+	height: 50px;
+	vertical-align: middle;
+	font-size: 42px;
+	font-weight: bold;
+}
+
+.me .score {
+	left: 250px;
+	text-align: right;
+}
+
+.you .score {
+	left: 430px;
+	text-align: left;
+}
+
