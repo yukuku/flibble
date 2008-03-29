@@ -1,0 +1,11 @@
+#summary Instructions page
+
+=== Instructions ===
+
+(Instructions iframe or div with internal scrolling)
+
+=== Close^1^ ===
+
+----
+
+Button ^1^ close this popup
