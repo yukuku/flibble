@@ -1,0 +1,13 @@
+#summary Popup progress bar before game starts
+#labels Phase-Design
+
+Status message^1^ ...
+
+`[===//===//===//===//=]`
+
+----
+
+^1^ can be:
+  * Loading
+  * Waiting for other player
+  * Synchronizing
