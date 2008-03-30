@@ -1,12 +1,8 @@
 package sg.edu.ntu.Flibble;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
-
-import javax.servlet.http.HttpServlet;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,18 +86,18 @@ public class RoomBean {
 		players.remove(p);
 	}
 	public JSONObject GetGameDetailsJSON() throws JSONException {
-		Enumeration e = games.keys();
+		Enumeration<String> e = games.keys();
 		JSONObject js = new JSONObject();
 		while (e.hasMoreElements()){
-			js.append("Games", GetGameDetailJSON((String) e.nextElement()));
+			js.append("Games", GetGameDetailJSON(e.nextElement()));
 		}
 		return js;	
 	}
 
 	public JSONObject GetGameDetailsJSON(JSONObject js) throws JSONException {
-		Enumeration e = games.keys();
+		Enumeration<String> e = games.keys();
 		while (e.hasMoreElements()){
-			js.append("Games", GetGameDetailJSON((String) e.nextElement()));
+			js.append("Games", GetGameDetailJSON(e.nextElement()));
 		}
 		return js;
 	}

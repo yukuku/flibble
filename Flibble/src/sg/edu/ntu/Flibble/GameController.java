@@ -61,7 +61,9 @@ import javax.servlet.http.HttpServletResponse;
 		else if("QAttack".equals(action)){
 			dispatcher = request.getRequestDispatcher("/TGame");
 		}
-		dispatcher.forward(request, response);
+		if (dispatcher != null) {
+		    dispatcher.forward(request, response);
+		}
 	}  	
 	
 	/* (non-Java-doc)

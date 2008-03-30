@@ -42,7 +42,7 @@ import org.json.JSONObject;
 		JSONObject js = new JSONObject();
 		
 		MyDebug.WriteDebug("Before if condition");
-		if(action.equals((String) "LoadInit") && userId != null && userId.equals("")!=true){
+		if(action.equals("LoadInit") && userId != null && userId.equals("")!=true){
 			MyDebug.WriteDebug("is loadinit");
 			if(gname!=null && gname.equals("")!=true){
 				MyDebug.WriteDebug("game name not empty");

@@ -38,7 +38,7 @@ import org.json.JSONObject;
 		PrintWriter out = response.getWriter();
 		
 		MyDebug.WriteDebug("Before if condition");
-		if(action.equals((String) "login") && room.AddPlayer(userId)==true){
+		if(action.equals("login") && room.AddPlayer(userId)==true){
 			JSONObject js = new JSONObject();
 			MyDebug.WriteDebug("Login Successful: " + userId);
 			try {
