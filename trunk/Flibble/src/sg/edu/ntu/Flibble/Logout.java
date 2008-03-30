@@ -39,7 +39,7 @@ import org.json.JSONObject;
 		PrintWriter out = response.getWriter();
 		
 		MyDebug.WriteDebug("Before if condition");
-		if(action.equals((String) "logout") ){
+		if(action.equals("logout") ){
 			room.DelPlayer(userId);
 			JSONObject js = new JSONObject();
 			MyDebug.WriteDebug("Logout Successful");
