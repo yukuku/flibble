@@ -13,7 +13,7 @@ public class Constant {
 	public static final String fJsonStatus = "Status";
 	public static final String fJsonUserId = "UserId";
 	public static final String fJsonGameTD = "GameTD";
-	public static final String fJsonGameSG = "GameSG";
+	public static final String fJsonGameSG = "Games";
 	public static final String fJsonGameUrl = "GameUrl";
 	public static Properties properties = null;
 

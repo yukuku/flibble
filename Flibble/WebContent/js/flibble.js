@@ -21,7 +21,7 @@ function FbCGame(){
 
 function FbLogin(){
 	var qryStr = $('form_div_Login').serialize();
-	FbAjax(qryStr, FbShowWellCome);
+	FbAjax(qryStr, FbShowWellcome);
 }
 
 function FbAjax(qryStr, fnct){
@@ -48,7 +48,7 @@ function FbSyncGameRoom(jsonObj){
 	$('div_GameRoom').update(retstr);
 }
 
-function FbShowWellCome(jsonObj){
+function FbShowWellcome(jsonObj){
 	var wellcome = "Wellcome, " + jsonObj.UserId + "";
 	$('div_Wellcome').update(wellcome);
    	$('div_Login').hide();

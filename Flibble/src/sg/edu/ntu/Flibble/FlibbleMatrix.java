@@ -29,6 +29,7 @@ public class FlibbleMatrix {
 	public JSONObject toJSONImg() throws JSONException {
 		JSONObject jo = new JSONObject();
 		jo.put("cellNo", cellNo);
+		jo.put("flibbleUrl", flibbleUrl);
 		jo.put("tagString", tagString);
 		return jo;
 	}
@@ -36,7 +37,6 @@ public class FlibbleMatrix {
 	public JSONObject toJSONTag() throws JSONException {
 		JSONObject jo = new JSONObject();
 		jo.put("cellNo", cellNo);
-		jo.put("flibbleUrl", flibbleUrl);
 		jo.put("tagString", tagString);
 		return jo;
 	}
