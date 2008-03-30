@@ -8,6 +8,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,6 +43,10 @@ public class FlibbleBridge extends javax.servlet.http.HttpServlet implements jav
 				break;
 			response.getWriter().print((char) c);
 		}
+		
+		
+		//--------for testing
+		Constant.getAppProp(this);
 	}
 
 	public void init() throws ServletException {
