@@ -1,6 +1,33 @@
 package sg.edu.ntu.Flibble;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServlet;
+
 public class Constant {
+	public static enum FL_STATUS { SUCCESS, FAILURE};
+	public static enum FL_GSTATUS { PLAYING, WAITING, COMPLETED };
+
+	public static final String fJsonStatus = "Status";
+	public static final String fJsonUserId = "UserId";
+	public static final String fJsonGameTD = "GameTD";
+	public static final String fJsonGameSG = "GameSG";
+	public static final String fJsonGameUrl = "GameUrl";
+	public static Properties properties = null;
+
+	public static void getAppProp(HttpServlet r){
+		try {
+			
+			InputStream in = r.getServletContext().getResourceAsStream(Constant.Application.bridgePropertyFile);
+			properties = new Properties();
+			properties.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public class Application {
 		public static final String bridgePropertyFile = "/WEB-INF/bridge.property";
 		public static final String userPropertyFile = "/WEB-INF/user.property";
@@ -11,6 +38,7 @@ public class Constant {
 		public static final String flickrPage = "page=1";
 		
 		public static final String appName = "Flibble";
+		
 		
 	}
 }
