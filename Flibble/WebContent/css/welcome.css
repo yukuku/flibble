@@ -1,0 +1,21 @@
+
+#window {	
+	width: 100%;	
+	margin-left: 180px;		
+}
+
+#banner {
+	height: 150px;
+	width: 100%;
+	clear: both;
+	margin-left: 180px;	
+}
+
+#header {
+	font-family: cursive;
+	font-size: 22pt;
+	color: #cc0000;
+	font-weight: Bold;
+	text-align: center;
+}
+
