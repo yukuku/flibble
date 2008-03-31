@@ -6,9 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <script type="text/javascript" src="js/prototype.js"></script>
 <script type="text/javascript" src="js/flibble.js"></script>
+<link rel="stylesheet" href="css/welcome.css" />
 <title>The Flibble Test Page</title>
 </head>
-<body>
+<body background="image/bg_img.jpg">
+
+
 <jsp:useBean id="applicationBean" class="sg.edu.ntu.Flibble.RoomBean" scope="application" />
 <script type="text/javascript">
 <!--
@@ -42,8 +45,17 @@ function printRspXml(rsxml) {
 //-->
 </script>
 
-<div id="div_Console" name="div_Console">Debug Console</div>
+<div id="banner">
+<img src="image/banner.jpg"/>
+</div>
 
+<div id="header">
+Welcome to Flibble Mashup Game
+</div> 
+
+<div id="window">
+
+<div id="div_Console" name="div_Console">Debug Console</div>
 <div id="div_Login">
 <form id="form_div_Login" name="form_div_Login" method="get" onsubmit="FbLogin(); return false;">
 <input type="hidden" name="action" value="login" /> 
@@ -52,6 +64,8 @@ User Name:&nbsp;<input id="txt_form_div_Login" name="user" type="text"/>
 <div id="err_div_Login"></div>
 </form>
 </div>
+
+
 
 <div id="div_Wellcome" name="div_Wellcome">Loading...</div>
 
@@ -70,7 +84,7 @@ Game Name:&nbsp;<input id="txt_form_div_CGame" name="gname" type="text"/>
 <div id='debugPanel'>
 	<%@include file="debug.inc.jsp" %>
 </div>
-
+</div>
 
 <script type="text/javascript">
 <!--
