@@ -36,14 +36,20 @@ function FbAjax(qryStr, fnct){
 }
 
 function FbSyncGameRoom(jsonObj){
-	alert("here");
 	alert("game count:" + jsonObj.Games.length);
 	var retstr = "";
+//	alert("about to sync game room");
 	for(var i=0; i<jsonObj.Games.length; i++){
-		retstr += "<div>" +  jsonObj.Games[i].UserA
-			+ " vs " + jsonObj.Games[i].UserB
-			+ " on " + jsonObj.Games[i].GameName 
-			+ " </div>";
+		retstr += '<table border="1" id="gt_' + jsonObj.Games[i].GameName + '" ';
+//		alert("[" + $('txt_form_div_Login').value + "][" + jsonObj.Games[i].UserA + "][" + jsonObj.Games[i].UserB + "]");
+		if ($('txt_form_div_Login').value != jsonObj.Games[i].UserA && jsonObj.Games[i].UserB == "") {
+			retstr += ' onclick\=\"alert(\'hello in\')\;\" ';
+		}	
+		retstr += '><tr><td colspan="2">Game: ' + jsonObj.Games[i].GameName +
+			'</td></tr><tr><td>P1: ' + jsonObj.Games[i].UserA +
+			'</td><td>P2 : ' + jsonObj.Games[i].UserB +
+			'</td></tr></table>';
+//	alert("about to sync game room string:" + retstr);
 	}
 	$('div_GameRoom').update(retstr);
 }
@@ -71,4 +77,10 @@ function ResponseEval(msg, fnct){
 
 function FbLogErr(varCaller){
 	$('div_Console').update(varCaller + " encountered error");
+}
+
+
+function FbJoinGame() {
+
+	
 }
