@@ -33,3 +33,24 @@ Flibble.joinGame = function(nick, gameName, callback) {
 Flibble.login = function(nick, callback) {
 	Flibble.call('login', {user: nick}, callback);
 }
+
+//=============================
+Flibble.checkGameStart = function(nick, gname) {
+	Flibble.call('query', gamevars, function checkGameStatus(res) {
+		if(res.Status == SUCCESS) {
+				for(var i=0; i< res.Games.length; i++) {
+					if (res.Games[i].GameName == gname) {
+						if (res.Games[i].GStatus == 'PLAYING') {
+								alert('loadini function call here');
+								// to change this part to return
+						}
+						else {
+							alert('game not started');
+						}
+					}
+				}
+		}
+	}
+	);
+	return false
+}

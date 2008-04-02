@@ -87,6 +87,8 @@ public class GameBean {
 		jo.put("UserB", userB);
 		jo.put("CurTurn", curTurn);
 		jo.put("Score", "" + scoreA + ":" + scoreB);
+		jo.put("ScoreA", "" + scoreA);
+		jo.put("ScoreB", "" + scoreB);
 		jo.put("GStatus", gstatus);
 		return jo;
 	}
