@@ -38,7 +38,7 @@ public class CGame extends javax.servlet.http.HttpServlet implements javax.servl
         String userId = request.getParameter("user");
         String gname = request.getParameter("gname");
         ServletContext appContext = getServletContext();
-        RoomBean room = (RoomBean) appContext.getAttribute("applicationBean");
+        RoomBean room = S.roomBean;
         boolean retFlag = false;
         
         response.setHeader("Cache-Control", "no-cache");
