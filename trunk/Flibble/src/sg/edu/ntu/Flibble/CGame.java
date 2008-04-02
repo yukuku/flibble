@@ -63,7 +63,7 @@ public class CGame extends javax.servlet.http.HttpServlet implements javax.servl
             if (gname != null && gname.equals("") != true) {
                 retFlag = room.JoinGame(gname, userId);
             }
-        } else if (action.equals("Query") && userId != null && userId.equals("") != true) {
+        } else if (action.equals("query") && userId != null && userId.equals("") != true) {
             retFlag = true;
         }
         
