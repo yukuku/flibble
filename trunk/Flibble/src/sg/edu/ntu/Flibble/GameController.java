@@ -27,6 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher dispatcher = null;
+		
+		if (Constant.properties==null){
+			Constant.getAppProp(this);
+		}
+		
 		String action = request.getParameter("action");
 		if("login".equals(action)){
 			dispatcher = request.getRequestDispatcher("/Login");
