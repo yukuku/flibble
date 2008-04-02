@@ -17,6 +17,8 @@
     <script type="text/javascript" src="yui/build/container/container-min.js"></script>
     <script type="text/javascript" src="yui/build/json/json-min.js"></script>
     <!-- custom css -->
+    <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
     <link rel="stylesheet" href="css/main.css" />
 </head>
 <body class="yui-skin-sam">
@@ -30,15 +32,15 @@
 
     <!-- self part -->
     <div class="me">
-        <div id="m1" class='square row1 col1'>test: drop into me</div>
-        <div id="m2" class='square row1 col2'></div>
-        <div id="m3" class='square row1 col3'></div>
-        <div id="m4" class='square row2 col1'></div>
-        <div id="m5" class='square row2 col2'></div>
-        <div id="m6" class='square row2 col3'></div>
-        <div id="m7" class='square row3 col1'></div>
-        <div id="m8" class='square row3 col2'></div>
-        <div id="m9" class='square row3 col3'></div>
+        <div id="m1" class='square row1 col1' cellId='1'>test: drop into me</div>
+        <div id="m2" class='square row1 col2' cellId='2'></div>
+        <div id="m3" class='square row1 col3' cellId='3'></div>
+        <div id="m4" class='square row2 col1' cellId='4'></div>
+        <div id="m5" class='square row2 col2' cellId='5'></div>
+        <div id="m6" class='square row2 col3' cellId='6'></div>
+        <div id="m7" class='square row3 col1' cellId='7'></div>
+        <div id="m8" class='square row3 col2' cellId='8'></div>
+        <div id="m9" class='square row3 col3' cellId='9'></div>
         
         <div id="mq" class='square question'>test: drag me</div>
         
@@ -50,15 +52,15 @@
     
     <!-- enemy part -->
     <div class="you">
-        <div id="y1" class='square row1 col1'></div>
-        <div id="y2" class='square row1 col2'></div>
-        <div id="y3" class='square row1 col3'></div>
-        <div id="y4" class='square row2 col1'></div>
-        <div id="y5" class='square row2 col2'></div>
-        <div id="y6" class='square row2 col3'></div>
-        <div id="y7" class='square row3 col1'></div>
-        <div id="y8" class='square row3 col2'></div>
-        <div id="y9" class='square row3 col3'></div>
+        <div id="y1" class='square row1 col1' cellId='1'></div>
+        <div id="y2" class='square row1 col2' cellId='2'></div>
+        <div id="y3" class='square row1 col3' cellId='3'></div>
+        <div id="y4" class='square row2 col1' cellId='4'></div>
+        <div id="y5" class='square row2 col2' cellId='5'></div>
+        <div id="y6" class='square row2 col3' cellId='6'></div>
+        <div id="y7" class='square row3 col1' cellId='7'></div>
+        <div id="y8" class='square row3 col2' cellId='8'></div>
+        <div id="y9" class='square row3 col3' cellId='9'></div>
 
         <div id="yq" class='square question'></div>
 
@@ -103,6 +105,22 @@
         new YAHOO.util.DDTarget('m'+i, 'm');
     } 
 })();
+
+
+var gamevars = document.location.href.toQueryParams();
+gamevars.user = gamevars.nick;
+gamevars.gname = gamevars.table;
+
+//Flibble.call('LoadInit', gamevars, 
+//function(res) {
+//	if (res.Status == SUCCESS) {
+//		$('mn').value = (res.UserA == gamevars.gname) ? res.UserA : res.UserB;
+//		$('yn').value = (res.UserA == gamevars.gname) ? res.UserB : res.UserA;
+//		alert("test:" + Hash.toQueryString(gamevars) + "mn =" + $('mn').value);
+//	}
+//}
+//);
+
 
 </script>
 
