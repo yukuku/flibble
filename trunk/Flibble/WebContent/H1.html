@@ -146,6 +146,7 @@ function submit(nick, table) {
 					window.alert("Failed to join the game. Please choose another or create a new one.");
 					return;
 				}
+				gotoNextPage(nick, table);
 			});
 		} else {
 			// create
@@ -154,10 +155,14 @@ function submit(nick, table) {
 					window.alert("Failed to create a new game. Please turn off your computer.");
 					return;
 				}
-				//gotoNextPage(nick, 
+				gotoNextPage(nick, ret.gname); 
 			});
 		}
 	});	
+}
+
+function gotoNextPage(nick, table) {
+	document.location.href = 'H2.html?' + $H({nick: nick, table: table}).toQueryString();
 }
 
 </script>
