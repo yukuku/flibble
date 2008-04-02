@@ -51,10 +51,28 @@ import org.json.JSONObject;
 		}
 		if(action.equals("QDefence") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){
 			retFlag = game.QDefence(userId);
+			if(retFlag == true){
+				try {
+					js.put(Constant.fJsonGameFlg, game.getCorrect());
+					retFlag = true;
+				}
+				catch (JSONException je){
+					out.println("error JSON");
+				}
+			}
 		}
 		if(action.equals("MAttack") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){
 			if(cellId != null && !cellId.equals("")){
 				retFlag = game.MAttack(userId, Integer.parseInt(cellId));
+				if(retFlag == true){
+					try {
+						js.put(Constant.fJsonGameFlg, game.getCorrect());
+						retFlag = true;
+					}
+					catch (JSONException je){
+						out.println("error JSON");
+					}
+				}
 			}
 		}
 		if(action.equals("QAttack") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){

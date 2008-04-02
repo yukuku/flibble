@@ -16,6 +16,7 @@ public class GameBean {
 	private Constant.FL_GSTATUS gstatus = Constant.FL_GSTATUS.WAITING;
 	private FlibbleMatrix[] fmA;
 	private FlibbleMatrix[] fmB;
+	private boolean correct = false;
 	
 	public GameBean() {
 	}
@@ -143,13 +144,21 @@ public class GameBean {
 		boolean retVal = false;
 		if(curTurn.equals(user)){
 			if(cellId == curCel){
+				correct = true;
 				if(user.equals(userA)){
 					scoreA++;
 				}
 				else {
 					scoreB++;
 				}
+				
+				if (scoreA == 9 || scoreB == 9) {
+					gstatus = Constant.FL_GSTATUS.COMPLETED;
+				}
 				retVal=true;
+			}
+			else {
+				correct = false;
 			}
 		}
 		return retVal;
@@ -161,5 +170,10 @@ public class GameBean {
 			retVal = true;
 		}
 		return retVal;
+	}
+	
+	
+	public boolean getCorrect(){
+		return correct;
 	}
 }
