@@ -71,6 +71,7 @@ public class CGame extends javax.servlet.http.HttpServlet implements javax.servl
             try {
                 js.put(Constant.fJsonStatus, Constant.FL_STATUS.SUCCESS);
                 js.put(Constant.fJsonUserId, userId);
+                js.put(Constant.fJsonGameName, gname);
                 js = room.GetGameDetailsJSON(js);
                 out.println(js.toString());
             } catch (JSONException je) {
