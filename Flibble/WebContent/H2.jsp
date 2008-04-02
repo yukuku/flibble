@@ -21,7 +21,7 @@
     <!-- custom css -->
     <link rel="stylesheet" href="css/main.css" />
 </head>
-<body>
+<body class="yui-skin-sam">
 
 <div id='window-outer'>
 <div id='window'>
