@@ -55,7 +55,17 @@ Welcome to Flibble Mashup Game
 
 <div id="window">
 
-<div id="div_Console" name="div_Console">Debug Console</div>
+<!-- ---------------- -->
+<div id="div_Join">
+<form id="form_div_Join" name="form_div_Join" method="get">
+<input type="hidden" name="action" value="JoinIn" /> 
+<input type="hidden" name="action" value="user" /> 
+<input type="hidden" name="action" value="gname" /> 
+</form>
+</div>
+
+<!-- ---------------- -->
+
 <div id="div_Login">
 <form id="form_div_Login" name="form_div_Login" method="get" onsubmit="FbLogin(); return false;">
 <input type="hidden" name="action" value="login" /> 
@@ -65,9 +75,11 @@ User Name:&nbsp;<input id="txt_form_div_Login" name="user" type="text"/>
 </form>
 </div>
 
+<!-- ---------------- -->
 
 
 <div id="div_Wellcome" name="div_Wellcome">Loading...</div>
+<!-- ---------------- -->
 
 <div id="div_CGame">
 <form id="form_div_CGame" name="form_div_CGame" method="get" onsubmit="FbCGame(); return false;">
@@ -76,10 +88,16 @@ Game Name:&nbsp;<input id="txt_form_div_CGame" name="gname" type="text"/>
 <input type="submit" id="btn_form_div_CGame" value="New Game" />
 <div id="err_div_CGame"></div>
 </form>
-
 </div>
+
+<!-- ---------------- -->
+
 <div id="div_GameRoom" name="div_GameRoom">Loading...</div>
 <div id="div_GamePanel" name="div_GamePanel">Loading...</div>
+
+<!-- ---------------- -->
+<hr/>
+<div id="div_Console" name="div_Console">Debug Console</div>
 <div id='maindiv'>Loading...</div>
 <div id='debugPanel'>
 	<%@include file="debug.inc.jsp" %>
