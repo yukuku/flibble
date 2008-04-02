@@ -20,7 +20,7 @@ html, body {
 }
 
 .window-h1 {
-	background-image: url(../image/bg1.jpg);
+	background-image: url(../image/background.jpg);
 }
 	 
 /*### H1 ###*/
@@ -35,7 +35,7 @@ html, body {
 	color: #dd1111;
 	font-weight: bold;
 	text-align: center;
-	padding-top: 110px;
+	padding-top: 140px;
 	margin-bottom: 90px;
 }
 
