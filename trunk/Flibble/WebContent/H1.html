@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/main.css" />
     <!-- custom js -->
     <script type="text/javascript" src="js/prototype.js"></script>
+    <script type="text/javascript" src="js/game.js"></script>
 </head>
 <body class="yui-skin-sam">
 
@@ -44,35 +45,8 @@
 				<p><input type="text" name="nick" class="startGameInput" id="nick" /></p>
 				<h2>Select table:</h2>
 				<div id="tableSelection">
-					<div class="table" onclick="void submit($F('nick'), 123);">
-						table name
-					</div>
 					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
-					</div>
-					<div class="table">
-						table name
+						Loading...
 					</div>
 				</div>
 				<h2>or <a href="javascript: void submit($F('nick'), 0);">Create a new table</a></h2>
@@ -138,6 +112,15 @@ panelInstructions.render();
 
 function startGame() {
 	panelStartGame.show();
+	Flibble.getTables(function(ret) {
+		var Games = ret.Games;
+		$('tableSelection').childElements().invoke('remove');
+		for (var i = 0; i < Games.length; i++) {
+			var game = Games[i];
+			var table = new Element('div', {class: 'table', onclick: "submit($F('nick'), '" + game.GameName + "')"}).update('GameName: ' + game.GameName);
+			$('tableSelection').appendChild(table);
+		}
+	});
 }
 
 function instructions() {
@@ -145,7 +128,36 @@ function instructions() {
 }
 
 function submit(nick, table) {
-	window.alert("nick=" + nick + "\ntable=" + table);
+	if (! nick) {
+		window.alert("Please fill in your nick name!");
+		return;
+	}
+	
+	Flibble.login(nick, function (ret) {
+		if (ret.Status == FAILURE) {
+			window.alert("Failed to register the nick name. Please choose another.");
+			return;
+		}
+		
+		if (table) {
+			// join
+			Flibble.joinGame(nick, table, function(ret) {
+				if (ret.Status == FAILURE) {
+					window.alert("Failed to join the game. Please choose another or create a new one.");
+					return;
+				}
+			});
+		} else {
+			// create
+			Flibble.createGame(nick, function(ret) {
+				if (ret.Status == FAILURE) {
+					window.alert("Failed to create a new game. Please turn off your computer.");
+					return;
+				}
+				//gotoNextPage(nick, 
+			});
+		}
+	});	
 }
 
 </script>

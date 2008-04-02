@@ -33,7 +33,7 @@ import org.json.JSONObject;
 		String action = request.getParameter("action");
 		String userId = request.getParameter("user");
 		ServletContext appContext = getServletContext();
-		RoomBean room = (RoomBean) appContext.getAttribute("applicationBean");
+		RoomBean room = S.roomBean;
 
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
