@@ -157,6 +157,7 @@ public class GameBean {
 				
 				if (scoreA == 9 || scoreB == 9) {
 					gstatus = Constant.FL_GSTATUS.COMPLETED;
+					curTurn = user.equals(userA)? userB : userA;
 				}
 			}
 			else {
