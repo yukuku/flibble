@@ -103,7 +103,14 @@ public class RoomBean {
 	}
 
 	public JSONObject GetGameDetailJSON(String key) throws JSONException {
-		return games.get(key).toJSON();
+		GameBean game = games.get(key);
+		JSONObject jo = null;
+		if (game.getGameStatus() != Constant.FL_GSTATUS.COMPLETED){
+			jo = game.toJSON();
+		}
+		return jo;
+		//====================
+		//return games.get(key).toJSON();
 	}
 	
 	public int GenCounter(){
