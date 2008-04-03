@@ -158,11 +158,11 @@ public class GameBean {
 				if (scoreA == 9 || scoreB == 9) {
 					gstatus = Constant.FL_GSTATUS.COMPLETED;
 				}
-				retVal=true;
 			}
 			else {
 				correct = false;
 			}
+			retVal=true;
 		}
 		return retVal;
 	}
