@@ -65,24 +65,54 @@
 	<div class="hd">Instructions</div>
 	<div class="bd">
 		<div id="instructionsBody">
-			<h1>Container Family: Examples</h1>
-			
-			<p>The Container Family of UI controls includes all content that floats above the main layer of the page: Tooltip, Panel, Dialog and SimpleDialog are the most commonly used Container controls. Module and Overlay are base classes useful in custom widget development.</p>
-			
-			<p>* The Module Control: The Module is a JavaScript representation of modular HTML content; all Container controls implement Module as a base class.</p>
-			<p>* Creating and Positioning an Overlay: The Overlay class extends Module and creates a piece of modular content that floats above the page, outside of the page flow. In this example, we look at how to create and position an Overlay.</p>
-		    <p>* Simple Tooltip Example: Creating and styling a simple Tooltip.</p>
-		    <p>* One Tooltip, Many Context Elements: You can reuse the same Tooltip instance to provide Tooltip effects for many elements, conserving browser resources and improving performance along the way.</p>
-		    <p>* Simple Panel Example: This example implements two simple Panels, one from markup and one purely from script, and shows how to configure options like draggability.</p>
-		    <p>* Skinning a Panel with Custom CSS: Introduction: In this example, we explore simple techniques for using CSS to customize the look and feel of a Panel Control instance.</p>
-		    <p>* Skinning a Panel with Custom CSS: Advanced: Building on the introductory skinning example, here we'll look at customizing mulitple Panel instances in the same document.</p>
-		    <p>* Creating a Modal "Loading" Panel: This example shows how to use a Panel Control instance to display a modal "loading" or "please wait" message.</p>
-		    <p>* Creating a Resizable Panel: In this example, we look at how Panel can be combined with the Resize utility to create resizable Panel Control instances.</p>
-		    <p>* Dialog Quickstart Example: This example demonstrates the most common use-case for the Dialog control — collecting data from the user and sending it to the server using XMLHttpRequest (Ajax) via the YUI Connection Manager.</p>
-		    <p>* SimpleDialog Quickstart Example: This example demonstrates the most common use-case for the SimpleDialog control — a control best used for simple ok/cancel or yes/no dialog forms.</p>
-		    <p>* Using ContainerEffect Transitions: The ContainerEffect object allows you to implement built-in transitions to fade-in/out or slide-in/out your Containers as they show and hide.</p>
-		    <p>* Using the Overlay Manager to Manage Multiple Panels: Overlay Manager makes it easy to manage the interaction of many Panels within the same window, giving focus to the window that is selected and keeping its z-index higher than that of its peers.</p>
-		    <p>* Implementing Container Keyboard Shortcuts with KeyListener: The KeyListener class, included with the Event Utility, makes it easy to tie keyboard shortcuts to specific actions in your application.</p>
+			<h1>About Flibble</h1>			
+			<p>
+				Flibble came out from a team of four NTU Info Sys students intended for the second assignment of CI6111 Internet Programming Course. 
+				Flibble is a mashup game using Flickr as a data provider. The game players can get an excited and joyful time by playing Flibble.
+				Flibble is just about matching pictures and their relevant texts.				
+			</p>
+			<h1>How to play Flibble</h1>			
+			<div id="instructionh1"><p>***Create new game***</p></div>
+			<p>1. Choose "Start Game" from the main page.</p>
+		    <p>2. Enter your nick name and Click "Create a new table". 
+		    <br>The system will create a new game table along with the nick name(you entered) and the table name (assigned by the system automatically).
+		        The new game table will appeared in the game table list so that the next player can see your game table.
+		    </p>		    
+		    <p>3.You will see the waiting for status bar. 
+		    <br>You can only enter into the game room when other player chooses your game table from the game table list.
+		        If the next player chooses your game table, you two will reach into the game playing room.
+		    </p>		    
+		    <div id="instructionh1"><p>***Join an existing game***</p></div>
+		    <p>1. Choose "Start Game" from the main page.</p>
+		    <p>2. Enter the nick name and select one game table which is not full from the game table list. 
+		    <br>You will be taken to the game playing room to compete with the player you selected.
+		    </p>
+		    <div id="instructionh1"><p>***Understanding game playing room***</p></div>
+		    <p>You will see the two panels, left panel and right panel. 
+		       In the left panel, you will see nine containers with some texts.
+		       Actually, this table is belonged to your competitor.
+		       In the right panel, you will see nine pictures. This is belonged to you.
+		       You will also see two containers at top. One is in the left panel and another is in the right panel.
+		       From the left top container, you will have to receive the picture from your competitor. 
+		       Into the right top container, you have to drag one picture from your right panel to send the picture to your competitor.		       		       
+		    </p>
+		    <div id="instructionh1"><p>***Playing game***</p></div>
+		    <p>1. If you are the game table creator, you have to start sending picture to your competitor by dragging one picture from the right panel into the right top container.
+		    <br>Otherwise, you have to wait for the picture from your competitor. Let's consider you are the game creator so you send the picture to your competitor.
+		    </p>		    
+		    <p>2. In your competitor side, the picture you sent will appear at the left top container.
+		    <br>Your competitor has to match the picture with the meaning of the texts of nine containers in the left panel.
+		    </p>
+		    <p>3. The competitor must drag the picture into one of nine containers that he think the meaning of the text in this container is described the meaning of the picture. 
+		    <br>If he/she can guess correctly,the container will be frozen, he will be worth to increase his score and it is his turn to send picture to you.
+			Otherwise, he/she has to wait for next picture from you to guess again.
+			Suppose your competitor could make a correct guess.
+			</p>			 	    
+		    <p>4. You will receive the image from your competitor in the left top container. Now it is your turn to guess.
+		    <br>If you can guess, it is your competitor's turn to guess. Otherwise, you have to guess again. 
+		    The game will continue like that until one player can be frozen all nine containers in the left panel.
+		    </p>		    
+		
 		</div>
 		
 		<div class="closeButton" onclick="void panelInstructions.hide();">
