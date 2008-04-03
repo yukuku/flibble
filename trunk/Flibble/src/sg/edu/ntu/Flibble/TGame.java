@@ -44,12 +44,12 @@ import org.json.JSONObject;
 		MyDebug.WriteDebug("Before if condition");
 		String cellId = request.getParameter("cellId");
 		GameBean game = room.getGame(gname);
-		if(action.equals("MDefence") && userId != null && userId.equals("")!=true && gname==null || gname.equals("")){
+		if(action.equals("MDefence") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
 			if(cellId != null && !cellId.equals("")){
 				retFlag = game.MDefence(userId, Integer.parseInt(cellId));
 			}
 		}
-		if(action.equals("QDefence") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){
+		if(action.equals("QDefence") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
 			retFlag = game.QDefence(userId);
 			if(retFlag == true){
 				try {
@@ -61,7 +61,7 @@ import org.json.JSONObject;
 				}
 			}
 		}
-		if(action.equals("MAttack") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){
+		if(action.equals("MAttack") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
 			if(cellId != null && !cellId.equals("")){
 				retFlag = game.MAttack(userId, Integer.parseInt(cellId));
 				if(retFlag == true){
@@ -75,7 +75,7 @@ import org.json.JSONObject;
 				}
 			}
 		}
-		if(action.equals("QAttack") && userId != null && userId.equals("")!=true && gname==null || "".equals(gname)){
+		if(action.equals("QAttack") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
 			if(cellId != null){
 				String url = game.QAttack(userId);
 				if(!url.equals("")){
@@ -88,6 +88,9 @@ import org.json.JSONObject;
 					}
 				}
 			}
+		}
+		if(action.equals("query2") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
+			retFlag = true;
 		}
 
 		if (retFlag){
