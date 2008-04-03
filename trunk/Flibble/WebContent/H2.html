@@ -17,14 +17,15 @@
     <script type="text/javascript" src="yui/build/container/container-min.js"></script>
     <script type="text/javascript" src="yui/build/json/json-min.js"></script>
     <!-- custom css -->
+    <link rel="stylesheet" href="css/main.css" />
+    <!-- custom js -->
     <script type="text/javascript" src="js/prototype.js"></script>
     <script type="text/javascript" src="js/game.js"></script>
-    <link rel="stylesheet" href="css/main.css" />
 </head>
 <body class="yui-skin-sam">
 
 <div id='window-outer'>
-<div id='window'>
+<div id='window' class='window-h2'>
 
     <!-- middle bar -->
     <div id="middlebar1" class="middlebar"></div>
@@ -73,7 +74,29 @@
 </div>
 </div>
 
+<div id="progressPanel">
+	<div class="hd">Status</div>
+	<div class="bd">
+		<h2 id="progressStatus">Loading...</h2>
+		<p><img src="image/loading.gif" width="220" height="19" /></p>
+	</div>
+	<div class="ft"></div>
+</div>
+
 <script type="text/javascript">
+// create panel
+
+var panelConfig = {
+	visible: true,
+	fixedcenter: true,   
+	close: false,
+	modal: true,
+	zindex: 10,
+	constraintoviewport: true
+};
+
+var panelProgress = new YAHOO.widget.Panel("progressPanel", panelConfig);
+panelProgress.render();
 
 (function() {
     // make mq draggable
@@ -107,20 +130,110 @@
 })();
 
 
-var gamevars = document.location.href.toQueryParams();
-gamevars.user = gamevars.nick;
-gamevars.gname = gamevars.table;
+var game = {};
 
-//Flibble.call('LoadInit', gamevars, 
+/*
+state:
+- 4 waiting for game to start
+- 5 getting images and tags
+- 6 ready to send image
+- 7 querying
+- 8 ready to guess
+*/
+game.state = 4;
+
+
+(function() {
+	var params = document.location.href.toQueryParams();
+	game.user = params.nick;
+	game.gname = params.table;
+})();
+
+
+//Flibble.call('LoadInit', game, 
 //function(res) {
 //	if (res.Status == SUCCESS) {
-//		$('mn').value = (res.UserA == gamevars.gname) ? res.UserA : res.UserB;
-//		$('yn').value = (res.UserA == gamevars.gname) ? res.UserB : res.UserA;
-//		alert("test:" + Hash.toQueryString(gamevars) + "mn =" + $('mn').value);
+//		$('mn').value = (res.UserA == game.gname) ? res.UserA : res.UserB;
+//		$('yn').value = (res.UserA == game.gname) ? res.UserB : res.UserA;
+//		alert("test:" + Hash.toQueryString(game) + "mn =" + $('mn').value);
 //	}
 //}
 //);
 
+var lastCallDone = true;
+function mainloop() {
+	if (lastCallDone) {
+		lastCallDone = false;
+		
+		if (game.state == 4) {
+			Flibble.query2(game.user, game.gname, function(ret) {
+				lastCallDone = true;
+				if (ret.Status == FAILURE) {
+					window.alert("State 4 error");
+					return;
+				}
+				if (ret.Games.GStatus == 'PLAYING') {
+					// move to state 5
+					game.state = 5;
+				} else if (ret.Games.GStatus == 'WAITING') {
+					$('progressStatus').update('Waiting for other player...');	
+				}
+			});
+		} else if (game.state == 5) {
+			Flibble.loadInit(game.user, game.gname, function(ret) {
+				lastCallDone = true;
+				if (ret.Status == FAILURE) {
+					window.alert("State 5 error");
+					return;
+				}
+				var GameTD = ret.GameTD;
+				var opponentName;
+				if (GameTD.UserA == game.user) {
+					opponentName = GameTD.UserB;
+				} else {
+					opponentName = GameTD.UserA;
+				}
+				// update names
+				$('mn').update(game.user);
+				$('yn').update(opponentName); 
+				// add more var
+				game.myImgs = GameTD.MyImgs;
+				game.myTags = GameTD.MyTags;
+				// load imgs into the squares
+				var myImgs = game.myImgs; 
+				for (var i = 0; i < myImgs.length; i++) {
+					var img = myImgs[i];
+					$('y' + (i+1)).style.backgroundImage = 'url(' + img.flibbleUrl + ')';
+				}
+				// load tags into the squares
+				var myTags = game.myTags;
+				for (var i = 0; i < myTags.length; i++) {
+					var tag = myTags[i];
+					$('m' + (i+1)).update(tag.tagString);
+				}
+				// set score
+				if (GameTD.UserA == game.user) {
+					$('ms').update(GameTD.ScoreA);
+					$('ys').update(GameTD.ScoreB);
+				} else {
+					$('ms').update(GameTD.ScoreB);
+					$('ys').update(GameTD.ScoreA);
+				}
+				// hide status panel
+				panelProgress.hide();
+				// change state
+				if (GameTD.UserA == game.user) {
+					game.state = 6;
+				} else {
+					game.state = 7;
+				}
+			});
+		}
+	}
+	// call every 3 seconds
+	setTimeout(mainloop, 3000);
+}
+mainloop();
 
 </script>
 
