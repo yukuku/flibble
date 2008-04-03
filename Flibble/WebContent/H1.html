@@ -117,7 +117,12 @@ function startGame() {
 		$('tableSelection').childElements().invoke('remove');
 		for (var i = 0; i < Games.length; i++) {
 			var game = Games[i];
-			var table = new Element('div', {class: 'table', onclick: "submit($F('nick'), '" + game.GameName + "')"}).update('GameName: ' + game.GameName);
+			var table;
+			if (game.GStatus == 'PLAYING') { 
+				table = new Element('div', {class: 'table', style: 'background-color: #dd7777', onclick: "void alert('This table is full.');"}).update('PLAYING<br/>' + game.UserA + '<br/>' + game.UserB);
+			} else if (game.GStatus == 'WAITING') {
+				table = new Element('div', {class: 'table', style: 'background-color: #77dd77', onclick: "submit($F('nick'), '" + game.GameName + "')"}).update('WAITING<br/>' + game.UserA + '<br/>' + game.UserB);
+			}
 			$('tableSelection').appendChild(table);
 		}
 	});

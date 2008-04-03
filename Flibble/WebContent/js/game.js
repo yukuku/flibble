@@ -41,3 +41,21 @@ Flibble.login = function(nick, callback) {
 Flibble.loadInit = function(user, gname, callback) {
 	Flibble.call('LoadInit', {user: user, gname: gname}, callback);
 }
+
+
+Flibble.MDefence = function(user, gname, cellId, callback) {
+	Flibble.call('MDefence', {user: user, gname: gname, cellId: +cellId-1}, callback);
+}
+
+Flibble.MAttack = function(user, gname, cellId, callback) {
+	Flibble.call('MAttack', {user: user, gname: gname, cellId: +cellId-1}, callback);
+}
+
+Flibble.QDefence = function(user, gname, callback) {
+	Flibble.call('QDefence', {user: user, gname: gname}, callback);
+}
+
+Flibble.QAttack = function(user, gname, callback) {
+	Flibble.call('QAttack', {user: user, gname: gname}, callback);
+}
+
