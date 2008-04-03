@@ -36,6 +36,7 @@ import org.json.JSONObject;
 		ServletContext appContext = getServletContext();
 		RoomBean room = S.roomBean;
 		boolean retFlag = false;
+		boolean delGameFlag = false;
 
 		response.setHeader("Cache-Control", "no-cache");
 		PrintWriter out = response.getWriter();
@@ -55,6 +56,13 @@ import org.json.JSONObject;
 				try {
 					js.put(Constant.fJsonGameFlg, game.getCorrect());
 					retFlag = true;
+					
+					//======================
+					//upon game complete, delete game here, also delete the 2 users from room
+					if(game.getGameStatus() == Constant.FL_GSTATUS.COMPLETED ){
+						delGameFlag = true;
+					}
+					//======================
 				}
 				catch (JSONException je){
 					out.println("error JSON");
@@ -113,6 +121,16 @@ import org.json.JSONObject;
 				out.println("error JSON");
 			}
 		}
+		
+		
+		//============================
+		if(delGameFlag == true){
+			MyDebug.WriteDebug(game.getGameName() + "Game completed, delete the game and user");
+			room.DelPlayer(game.getUserA());
+			room.DelPlayer(game.getUserB());
+			room.DelGame(game.getGameName());
+		}
+		//============================
 	}  	
 	
 	/* (non-Java-doc)
