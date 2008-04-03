@@ -22,6 +22,10 @@ Flibble.getTables = function(callback) {
 	Flibble.call('query', {user: ''+Math.random()}, callback);
 }
 
+Flibble.query2 = function(user, gname, callback) {
+	Flibble.call('query2', {user: user, gname: gname}, callback);
+}
+
 Flibble.createGame = function(nick, callback) {
 	Flibble.call('CGame', {user: nick}, callback);
 }
@@ -34,23 +38,6 @@ Flibble.login = function(nick, callback) {
 	Flibble.call('login', {user: nick}, callback);
 }
 
-//=============================
-Flibble.checkGameStart = function(nick, gname) {
-	Flibble.call('query', gamevars, function checkGameStatus(res) {
-		if(res.Status == SUCCESS) {
-				for(var i=0; i< res.Games.length; i++) {
-					if (res.Games[i].GameName == gname) {
-						if (res.Games[i].GStatus == 'PLAYING') {
-								alert('loadini function call here');
-								// to change this part to return
-						}
-						else {
-							alert('game not started');
-						}
-					}
-				}
-		}
-	}
-	);
-	return false
+Flibble.loadInit = function(user, gname, callback) {
+	Flibble.call('LoadInit', {user: user, gname: gname}, callback);
 }

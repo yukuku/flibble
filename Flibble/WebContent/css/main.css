@@ -30,8 +30,6 @@ html, body {
 }
 
 #mainTitle {
-	font-family: cursive;
-	font-size: 60pt;
 	color: #dd1111;
 	font-weight: bold;
 	text-align: center;
@@ -135,6 +133,10 @@ html, body {
 
 /*### H2 ###*/
 
+#progressPanel .bd {
+	text-align: left;
+}
+
 .middlebar {
 	background-color: #dddddd;
 	width: 3px;
@@ -161,6 +163,9 @@ html, body {
 	z-index: 5;
 	vertical-align: middle;
 	text-align: center;
+	background-position: center center;
+	background-repeat: no-repeat;
+	overflow: hidden;
 }
 
 .row1 {

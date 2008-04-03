@@ -36,7 +36,7 @@ public class FlibbleBridge2 {
 							".static.flickr.com/" + nodMap.getNamedItem("server").getNodeValue() +
 							"/" + nodMap.getNamedItem("id").getNodeValue() +
 							"_" + nodMap.getNamedItem("secret").getNodeValue() +
-							".jpg";
+							"_t.jpg";
 					MyDebug.WriteDebug("current url is " + furl);
 					MyDebug.WriteDebug("current tag is " + tag);
 					MyDebug.WriteDebug("current id is " + i);
