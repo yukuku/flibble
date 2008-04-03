@@ -33,12 +33,35 @@ public class FlibbleBridge2 {
 				NamedNodeMap nodMap = nodes.item(j-1).getAttributes();
 				String tag = nodMap.getNamedItem("tags").getNodeValue().trim();
 				
+				// remove tag with "?" and strange one
+				{
+					String[] tt = tag.split(" ");
+					String tag2 = "";
+					for (int o = 0; o < tt.length; o++) {
+						String tc = tt[o];
+						boolean bad = false;
+						for (int q = 0; q < tc.length(); q++) {
+							if (tc.charAt(q) > 127) {
+								bad = true;
+							}
+						}
+						if (bad) continue;
+						if (! tc.contains("?") && tc.length() > 2 && Character.isLetter(tc.charAt(0))) {
+							tag2 += tc + " ";
+						}
+					}
+					tag = tag2.trim();
+				}
+				
+
 				// to remove duplicate tags
 				for (k=0; k<i; k++){
 					if(fm[k].getTagString().equals(tag) == true){
 						isDuplicate = true;
 					}
 				}
+				
+				
 				if(tag !=null && tag.trim().equals("") != true && isDuplicate != true) {
 					String furl = "http://farm" + nodMap.getNamedItem("farm").getNodeValue() +
 							".static.flickr.com/" + nodMap.getNamedItem("server").getNodeValue() +

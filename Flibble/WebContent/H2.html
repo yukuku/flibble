@@ -84,6 +84,17 @@
 	<div class="ft"></div>
 </div>
 
+<div id="completePanel">
+	<div class="hd">The End</div>
+	<div class="bd">
+		<h2 id="completeStatus"></h2>
+		<div class="closeButton" onclick="document.location.href = 'H1.html'">
+			Restart
+		</div>
+	</div>
+	<div class="ft"></div>
+</div>
+
 <script type="text/javascript">
 // create panel
 var yudg = YAHOO.util.Dom.get;
@@ -96,9 +107,21 @@ var panelConfig = {
 	zindex: 10,
 	constraintoviewport: true
 };
+var panelConfig2 = {
+	width: "400px",
+	visible: false,
+	fixedcenter: true,   
+	close: false,
+	modal: true,
+	zindex: 10,
+	constraintoviewport: true
+};
 
 var panelProgress = new YAHOO.widget.Panel("progressPanel", panelConfig);
 panelProgress.render();
+
+var panelComplete = new YAHOO.widget.Panel("completePanel", panelConfig2);
+panelComplete.render();
 
 (function() {
     // make mq draggable
@@ -161,7 +184,6 @@ panelProgress.render();
         				$('mq').style.backgroundImage = '';
         				// clr text
         				$(id).update('');
-        				        				
         			} else {
         				// put hint
         				$('mh').update("Your guess is wrong!<br/>Now send an image to your opponent.");
@@ -178,7 +200,12 @@ panelProgress.render();
         				// clr bg
         				$('mq').style.backgroundImage = '';
         			}
-        			game.state = 6;
+        			if (ret.Games.GStatus == 'COMPLETED') {
+						game.state = 11;
+					} else {
+						game.state = 6;
+					}
+        			
         		}
         	});
         } else {
@@ -274,6 +301,7 @@ state:
 - 7 querying
 - 8 getting image to guess
 - 9 ready to guess 
+- 11 end
 */
 game.state = 4;
 
@@ -389,8 +417,11 @@ function mainloop() {
 							YAHOO.util.Dom.setXY(abc, YAHOO.util.Dom.get(game.lastSent).startPos);
 						}
 					}
-
-					game.state = 8;
+					if (ret.Games.GStatus == 'COMPLETED') {
+						game.state = 11;
+					} else {
+						game.state = 8;
+					}
 				}
 			});
 		} else if (game.state == 8) {
@@ -407,10 +438,20 @@ function mainloop() {
 			});
 		} else if (game.state == 9) {
 			lastCallDone = true;
+		} else if (game.state == 11) {
+			var ms = +($('ms').innerHTML);
+			var ys = +($('ys').innerHTML);
+			
+			if (ms > ys) {
+				$('completeStatus').update('You won!');
+			} else {
+				$('completeStatus').update('You lost!');
+			}
+			panelComplete.show();
 		}
 	}
 	// call every 3 seconds
-	setTimeout(mainloop, 3000);
+	setTimeout(mainloop, 1000);
 }
 mainloop();
 
@@ -423,6 +464,7 @@ function debugwaku() {
 	} else if (game.state == 6) {
 		$('yh').update('↑<br/>Drag a picture below to this box.');
 	} else if (game.state == 7) {
+		$('mh').update('');
 		$('yh').update('Wait for your opponent response... ^^');
 	} else if (game.state == 8) {
 		$('yh').update('');
