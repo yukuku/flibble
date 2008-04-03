@@ -33,7 +33,7 @@
 
     <!-- self part -->
     <div class="me">
-        <div id="m1" class='square row1 col1' cellId='1'>test: drop into me</div>
+        <div id="m1" class='square row1 col1' cellId='1'></div>
         <div id="m2" class='square row1 col2' cellId='2'></div>
         <div id="m3" class='square row1 col3' cellId='3'></div>
         <div id="m4" class='square row2 col1' cellId='4'></div>
@@ -43,7 +43,7 @@
         <div id="m8" class='square row3 col2' cellId='8'></div>
         <div id="m9" class='square row3 col3' cellId='9'></div>
         
-        <div id="mq" class='square question'>test: drag me</div>
+        <div id="mq" class='square question'></div>
         
         <div id="mn" class='nick'></div>
         <div id="ms" class='score'></div>
@@ -141,14 +141,29 @@ panelProgress.render();
 			        ).animate();
 					return;
         		} else if (ret.Status == SUCCESS) {
+					var Games = ret.Games;
+					if (Games.UserA == game.user) {
+						$('ms').update(Games.ScoreA);
+						$('ys').update(Games.ScoreB);
+					} else {
+						$('ms').update(Games.ScoreB);
+						$('ys').update(Games.ScoreA);
+					}
+					
         			if (ret.Correct) {
+        				// put hint
+        				$('mh').update("Correct! You got one point.<br/>Now send an image to your opponent.");
         				// send back
-        				yudg('mq').setXY(this2.getEl().startPos);
+        				YAHOO.util.Dom.setXY('mq', this2.getEl().startPos);
         				// set bg
         				$(id).style.backgroundImage = $('mq').style.backgroundImage;
         				// clr bg
         				$('mq').style.backgroundImage = '';
+        				// clr text
+        				$(id).update('');
         			} else {
+        				// put hint
+        				$('mh').update("Your guess is wrong!<br/>Now send an image to your opponent.");
         				// send back anime
         				new YAHOO.util.Motion(   
 				            this2.id, {   
@@ -216,7 +231,6 @@ panelProgress.render();
 						return;
 					} else if (ret.Status == SUCCESS) {
 						game.lastSent = this2.id;
-						window.alert('lastSent = ' + game.lastSent); 
 						game.state = 7;
 					}
 				});
@@ -356,13 +370,22 @@ function mainloop() {
 				if (ret.Status == FAILURE) {
 					// try again
 				} else if (ret.Status == SUCCESS) {
+					var Games = ret.Games;
+					if (Games.UserA == game.user) {
+						$('ms').update(Games.ScoreA);
+						$('ys').update(Games.ScoreB);
+					} else {
+						$('ms').update(Games.ScoreB);
+						$('ys').update(Games.ScoreA);
+					}
+					
 					if (ret.Correct) {
 						$(game.lastSent).hide();
 					} else {
 						//put back
 						var abc = YAHOO.util.Dom.get(game.lastSent);
 						if (abc) {
-							abc.setXY(YAHOO.util.Dom.get(game.lastSent).startPos);
+							YAHOO.util.Dom.setXY(abc, YAHOO.util.Dom.get(game.lastSent).startPos);
 						}
 					}
 					game.state = 8;
@@ -390,7 +413,23 @@ function mainloop() {
 mainloop();
 
 function debugwaku() {
-	document.title = game.state;
+	//document.title = game.state;
+	
+	if (game.state == 5) {
+		$('mh').update('');
+		$('yh').update('');
+	} else if (game.state == 6) {
+		$('mh').update('');
+		$('yh').update('↑<br/>Drag a picture below to this box.');
+	} else if (game.state == 7) {
+		$('yh').update('Wait for your opponent response... ^^');
+	} else if (game.state == 8) {
+		$('yh').update('');
+		$('mh').update('Getting image from opponent...');
+	} else if (game.state == 9) {
+		$('mh').update('↑<br/>Make guess by dragging image to one of the boxes below');
+	}
+	
 	setTimeout(debugwaku, 100);
 }
 debugwaku();
