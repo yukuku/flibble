@@ -18,7 +18,7 @@ public class Constant {
 	public static final String fJsonGameFlg = "Correct";
 	public static final String fJsonGameName = "gname";
 	public static Properties properties = null;
-	public static int pageNumber = 0;
+	public static int pageNumber = 1;
 	public static final int pageNumberMax = 100;
 
 	public static void getAppProp(HttpServlet r){

@@ -146,6 +146,7 @@ public class FlibbleBridge2 {
 		+ "&" + Constant.Application.flickrExtras + "=" + Constant.properties.getProperty("FlibbleDefaultExtras") + "&" + Constant.Application.flickrPerPage
 		+ "=" + (Math.pow(Integer.parseInt(Constant.properties.getProperty("FlibbleDefaultMatrixSize")), 2) * 2) + "&" 
 		+ Constant.Application.flickrPage + "=" + Constant.pageNumber;
+		MyDebug.WriteDebug(url);
 		if (Constant.pageNumber < Constant.pageNumberMax) {
 			Constant.pageNumber++;
 		}
