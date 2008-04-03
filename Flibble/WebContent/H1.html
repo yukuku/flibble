@@ -24,6 +24,15 @@
 </head>
 <body class="yui-skin-sam">
 
+<script type="text/javascript">
+
+if (navigator.appName == 'Microsoft Internet Explorer') {
+	window.alert("This will not work in IE! Please use Firefox!");
+	document.location.href="http://www.yahoo.com/";
+}
+
+</script>
+
 <div id='window-outer'>
 <div id='window' class='window-h1'>
 	<div id="H1">
@@ -65,14 +74,14 @@
 	<div class="hd">Instructions</div>
 	<div class="bd">
 		<div id="instructionsBody">
-			<h1>About Flibble</h1>			
+			<h1>About Flibble</h1>
 			<p>
 				Flibble came out from a team of four NTU Info Sys students intended for the second assignment of CI6111 Internet Programming Course. 
 				Flibble is a mashup game using Flickr as a data provider. The game players can get an excited and joyful time by playing Flibble.
 				Flibble is just about matching pictures and their relevant texts.				
 			</p>
 			<h1>How to play Flibble</h1>			
-			<div id="instructionh1"><p>***Create new game***</p></div>
+			<div class="instructionh1"><p>***Create new game***</p></div>
 			<p>1. Choose "Start Game" from the main page.</p>
 		    <p>2. Enter your nick name and Click "Create a new table". 
 		    <br>The system will create a new game table along with the nick name(you entered) and the table name (assigned by the system automatically).
@@ -82,12 +91,12 @@
 		    <br>You can only enter into the game room when other player chooses your game table from the game table list.
 		        If the next player chooses your game table, you two will reach into the game playing room.
 		    </p>		    
-		    <div id="instructionh1"><p>***Join an existing game***</p></div>
+		    <div class="instructionh1"><p>***Join an existing game***</p></div>
 		    <p>1. Choose "Start Game" from the main page.</p>
 		    <p>2. Enter the nick name and select one game table which is not full from the game table list. 
 		    <br>You will be taken to the game playing room to compete with the player you selected.
 		    </p>
-		    <div id="instructionh1"><p>***Understanding game playing room***</p></div>
+		    <div class="instructionh1"><p>***Understanding game playing room***</p></div>
 		    <p>You will see the two panels, left panel and right panel. 
 		       In the left panel, you will see nine containers with some texts.
 		       Actually, this table is belonged to your competitor.
@@ -96,7 +105,7 @@
 		       From the left top container, you will have to receive the picture from your competitor. 
 		       Into the right top container, you have to drag one picture from your right panel to send the picture to your competitor.		       		       
 		    </p>
-		    <div id="instructionh1"><p>***Playing game***</p></div>
+		    <div class="instructionh1"><p>***Playing game***</p></div>
 		    <p>1. If you are the game table creator, you have to start sending picture to your competitor by dragging one picture from the right panel into the right top container.
 		    <br>Otherwise, you have to wait for the picture from your competitor. Let's consider you are the game creator so you send the picture to your competitor.
 		    </p>		    

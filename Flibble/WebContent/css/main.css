@@ -58,7 +58,11 @@ html, body {
 	text-align: left;
 }
 
-#instructionh1 {
+#instructionsBody h1 {
+	text-align: center;
+}
+
+.instructionh1 {
 	font-weight: bold;
 }
 
