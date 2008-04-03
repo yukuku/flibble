@@ -138,6 +138,7 @@ public class GameBean {
 		String retVal = "";
 		if(curTurn.equals(user) && curCel != -1){
 			retVal = user.equals(userA)? fmB[curCel].getFlibbleUrl() : fmA[curCel].getFlibbleUrl();
+			MyDebug.WriteDebug("CurTurn = " + curTurn + "; Curn Image =" + retVal);
 		}
 		return retVal;
 	}

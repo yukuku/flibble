@@ -85,6 +85,7 @@
 
 <script type="text/javascript">
 // create panel
+var yudg = YAHOO.util.Dom.get;
 
 var panelConfig = {
 	visible: true,
@@ -100,13 +101,12 @@ panelProgress.render();
 
 (function() {
     // make mq draggable
-    var startPos = YAHOO.util.Dom.getXY('mq');
     var mqd = new YAHOO.util.DD('mq', 'm');
     mqd.onInvalidDrop = function(e) {
         new YAHOO.util.Motion(   
             this.id, {   
                 points: {   
-                    to: startPos  
+                    to: this.getEl().startPos  
                 }  
             },   
             0.3,   
@@ -114,19 +114,136 @@ panelProgress.render();
         ).animate();
     };
     mqd.startDrag = function(e) {
+    	this.getEl().startPos = YAHOO.util.Dom.getXY(this.id);
         YAHOO.util.Dom.setStyle(this.id, 'opacity', 0.5);
     }
     mqd.endDrag = function(e) {
         YAHOO.util.Dom.setStyle(this.id, 'opacity', 1.0);
     }
     mqd.onDragDrop = function(e, id) {
-        YAHOO.util.Dom.setXY(this.id, YAHOO.util.Dom.getXY(id), true);
+    	var this2 = this;
+    	if (game.state == 9) {
+        	YAHOO.util.Dom.setXY(this.id, YAHOO.util.Dom.getXY(id), true);
+        	
+        	Flibble.MAttack(game.user, game.gname, $(id).readAttribute('cellId'), function (ret) {
+        		if (ret.Status == FAILURE) {
+        			window.alert('State 9 error');
+					game.state = 7;
+					new YAHOO.util.Motion(   
+			            this2.id, {   
+			                points: {   
+			                    to: this2.getEl().startPos  
+			                }
+			            },   
+			            0.3,   
+			            YAHOO.util.Easing.easeOut   
+			        ).animate();
+					return;
+        		} else if (ret.Status == SUCCESS) {
+        			if (ret.Correct) {
+        				// send back
+        				yudg('mq').setXY(this2.getEl().startPos);
+        				// set bg
+        				$(id).style.backgroundImage = $('mq').style.backgroundImage;
+        				// clr bg
+        				$('mq').style.backgroundImage = '';
+        			} else {
+        				// send back anime
+        				new YAHOO.util.Motion(   
+				            this2.id, {   
+				                points: {   
+				                    to: this2.getEl().startPos  
+				                }
+				            },   
+				            0.3,   
+				            YAHOO.util.Easing.easeOut   
+				        ).animate();
+        				// clr bg
+        				$('mq').style.backgroundImage = '';
+        			}
+        		}
+        	});
+        } else {
+			new YAHOO.util.Motion(   
+	            this.id, {   
+	                points: {   
+	                    to: this2.getEl().startPos  
+	                }  
+	            },   
+	            0.3,   
+	            YAHOO.util.Easing.easeOut   
+	        ).animate();
+        }
     }
     
     // make m1 to m9 droppable
     for (var i = 1; i <= 9; i++) {
         new YAHOO.util.DDTarget('m'+i, 'm');
     } 
+})();
+
+(function() {
+    // make y1 to y9 draggable
+    for (var i = 1; i <= 9; i++) {
+        var yx = new YAHOO.util.DD('y'+i, 'y');
+        yx.startDrag = function(e) {
+	        YAHOO.util.Dom.setStyle(this.id, 'opacity', 0.5);
+	        this.getEl().startPos = YAHOO.util.Dom.getXY(this.id);
+	    }
+	    yx.endDrag = function(e) {
+	        YAHOO.util.Dom.setStyle(this.id, 'opacity', 1.0);
+	    }
+	    yx.onDragDrop = function(e, id) {
+	    	var this2 = this;
+	    	if (id == 'yq' && game.state == 6) {
+	        	YAHOO.util.Dom.setXY(this.id, YAHOO.util.Dom.getXY(id), true);
+	        	
+				Flibble.MDefence(game.user, game.gname, $(this.id).readAttribute('cellId'), function (ret) {
+					if (ret.Status == FAILURE) {
+						window.alert('State 6 error');
+						game.state = 7;
+						new YAHOO.util.Motion(   
+				            this2.id, {   
+				                points: {   
+				                    to: this2.getEl().startPos  
+				                }  
+				            },   
+				            0.3,   
+				            YAHOO.util.Easing.easeOut   
+				        ).animate();
+						return;
+					} else if (ret.Status == SUCCESS) {
+						game.lastSent = this2.id;
+						window.alert('lastSent = ' + game.lastSent); 
+						game.state = 7;
+					}
+				});
+	        } else {
+		        new YAHOO.util.Motion(   
+		            this2.id, {   
+		                points: {   
+		                    to: this2.getEl().startPos  
+		                }  
+		            },   
+		            0.3,   
+		            YAHOO.util.Easing.easeOut   
+		        ).animate();
+	        }
+	    }
+	    yx.onInvalidDrop = function(e) {
+	        new YAHOO.util.Motion(   
+	            this.id, {   
+	                points: {   
+	                    to: this.getEl().startPos  
+	                }  
+	            },   
+	            0.3,   
+	            YAHOO.util.Easing.easeOut   
+	        ).animate();
+	    };
+    } 
+    // make yq droppable
+    var yqd = new YAHOO.util.DDTarget('yq', 'y');
 })();
 
 
@@ -138,7 +255,8 @@ state:
 - 5 getting images and tags
 - 6 ready to send image
 - 7 querying
-- 8 ready to guess
+- 8 getting image to guess
+- 9 ready to guess 
 */
 game.state = 4;
 
@@ -228,12 +346,53 @@ function mainloop() {
 					game.state = 7;
 				}
 			});
+		} else if (game.state == 6) {
+			lastCallDone = true;
+		} else if (game.state == 7) {
+			Flibble.QDefence(game.user, game.gname, function (ret) {
+				lastCallDone = true;
+				if (ret.Status == FAILURE) {
+					// try again
+				} else if (ret.Status == SUCCESS) {
+					if (ret.Correct) {
+						$(game.lastSent).hide();
+					} else {
+						//put back
+						var abc = YAHOO.util.Dom.get(game.lastSent);
+						if (abc) {
+							abc.setXY(YAHOO.util.Dom.get(game.lastSent).startPos);
+						}
+					}
+					game.state = 8;
+				}
+			});
+		} else if (game.state == 8) {
+			Flibble.QAttack(game.user, game.gname, function (ret) {
+				lastCallDone = true;
+				if (ret.Status == FAILURE) {
+					window.alert("State 8 error");
+					return;
+				} else if (ret.Status == SUCCESS) {
+					var GameUrl = ret.GameUrl;
+					$('mq').style.backgroundImage = 'url(' + GameUrl + ')';
+					game.state = 9;
+				}
+			});
+		} else if (game.state == 9) {
+			lastCallDone = true;
 		}
 	}
 	// call every 3 seconds
 	setTimeout(mainloop, 3000);
 }
 mainloop();
+
+function debugwaku() {
+	document.title = game.state;
+	setTimeout(debugwaku, 100);
+}
+debugwaku();
+
 
 </script>
 

@@ -98,6 +98,7 @@ html, body {
 	border-top: 2px inset #000066;		
 	background-color: #ccccff;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .tablered {
@@ -271,6 +272,14 @@ html, body {
 .you .score {
 	left: 430px;
 	text-align: left;
+}
+
+#yq {
+	z-index: 4;
+}
+
+#mq {
+	z-index: 6;
 }
 
 
