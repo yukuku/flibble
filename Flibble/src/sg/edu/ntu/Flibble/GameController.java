@@ -51,6 +51,9 @@ import javax.servlet.http.HttpServletResponse;
 		else if("query".equals(action)){
 			dispatcher = request.getRequestDispatcher("/CGame");
 		}
+		else if("query2".equals(action)){
+			dispatcher = request.getRequestDispatcher("/TGame");
+		}
 		else if("LoadInit".equals(action)){
 			dispatcher = request.getRequestDispatcher("/LoadInit");
 		}
