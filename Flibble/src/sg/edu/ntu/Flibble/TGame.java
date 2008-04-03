@@ -41,7 +41,7 @@ import org.json.JSONObject;
 		PrintWriter out = response.getWriter();
 		JSONObject js = new JSONObject();
 		
-		MyDebug.WriteDebug("Before if condition");
+		MyDebug.WriteDebug("Before if condition["+ request.getQueryString() +"]");
 		String cellId = request.getParameter("cellId");
 		GameBean game = room.getGame(gname);
 		if(action.equals("MDefence") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
@@ -76,16 +76,14 @@ import org.json.JSONObject;
 			}
 		}
 		if(action.equals("QAttack") && userId != null && userId.equals("")!=true && gname!=null && "".equals(gname) != true){
-			if(cellId != null){
-				String url = game.QAttack(userId);
-				if(!url.equals("")){
-					try {
-						js.put(Constant.fJsonGameUrl, url);
-						retFlag = true;
-					}
-					catch (JSONException je){
-						out.println("error JSON");
-					}
+			String url = game.QAttack(userId);
+			if(!url.equals("")){
+				try {
+					js.put(Constant.fJsonGameUrl, url);
+					retFlag = true;
+				}
+				catch (JSONException je){
+					out.println("error JSON");
 				}
 			}
 		}
@@ -98,6 +96,7 @@ import org.json.JSONObject;
 				js.put(Constant.fJsonStatus, Constant.FL_STATUS.SUCCESS);
 				js.put(Constant.fJsonUserId, userId);
 				js.put(Constant.fJsonGameSG, game.toJSON());
+				MyDebug.WriteDebug(js.toString());
 				out.println(js.toString());
 			}
 			catch (JSONException je){
