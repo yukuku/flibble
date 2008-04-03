@@ -47,13 +47,15 @@ import org.json.JSONObject;
 			if(gname!=null && gname.equals("")!=true){
 				MyDebug.WriteDebug("game name not empty");
 				GameBean game = room.getGame(gname);
-				try {
-					MyDebug.WriteDebug("Constructing json");
-					js.put(Constant.fJsonGameTD, game.toJSONInit(userId));
-					retFlag = true;
-				}
-				catch (JSONException je){
-					out.println("error JSON");
+				if (game.getGameStatus() == Constant.FL_GSTATUS.PLAYING){
+					try {
+						MyDebug.WriteDebug("Constructing json");
+						js.put(Constant.fJsonGameTD, game.toJSONInit(userId));
+						retFlag = true;
+					}
+					catch (JSONException je){
+						out.println("error JSON");
+					}
 				}
 			}
 		}

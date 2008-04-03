@@ -22,16 +22,24 @@ public class FlibbleBridge2 {
 		FlibbleMatrix [] fm = new FlibbleMatrix[imgCount];
 		
 		try {
-			int i =0, j=0;
+			int i =0, j=0, k=0;
 			NodeList nodes = null;
 			while (i<imgCount){
+				boolean isDuplicate = false;
 				if(j==0){
 					nodes = getNodes();
 					j = imgCount*2;
 				}
 				NamedNodeMap nodMap = nodes.item(j-1).getAttributes();
-				String tag = nodMap.getNamedItem("tags").getNodeValue();
-				if(tag !=null && tag.trim().equals("") != true) {
+				String tag = nodMap.getNamedItem("tags").getNodeValue().trim();
+				
+				// to remove duplicate tags
+				for (k=0; k<i; k++){
+					if(fm[k].getTagString().equals(tag) == true){
+						isDuplicate = true;
+					}
+				}
+				if(tag !=null && tag.trim().equals("") != true && isDuplicate != true) {
 					String furl = "http://farm" + nodMap.getNamedItem("farm").getNodeValue() +
 							".static.flickr.com/" + nodMap.getNamedItem("server").getNodeValue() +
 							"/" + nodMap.getNamedItem("id").getNodeValue() +
@@ -82,7 +90,14 @@ public class FlibbleBridge2 {
 	public static String getFlickImgs2() throws IOException {
 		String url = Constant.Application.flickrConnString + "&" + Constant.Application.flickrApiKey + "=" + Constant.properties.getProperty("FlibbleDefaultApiKey")
 		+ "&" + Constant.Application.flickrExtras + "=" + Constant.properties.getProperty("FlibbleDefaultExtras") + "&" + Constant.Application.flickrPerPage
-		+ "=" + (Math.pow(Integer.parseInt(Constant.properties.getProperty("FlibbleDefaultMatrixSize")), 2) * 2) + "&" + Constant.Application.flickrPage;
+		+ "=" + (Math.pow(Integer.parseInt(Constant.properties.getProperty("FlibbleDefaultMatrixSize")), 2) * 2) + "&" 
+		+ Constant.Application.flickrPage + "=" + Constant.pageNumber;
+		if (Constant.pageNumber < Constant.pageNumberMax) {
+			Constant.pageNumber++;
+		}
+		else {
+			Constant.pageNumber = 1;
+		}
 
 		HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
 		String ret = "";
@@ -92,7 +107,7 @@ public class FlibbleBridge2 {
 			int c = in2.read();
 			if (c < 0)
 				break;
-			System.out.print((char) c);
+			MyDebug.WriteDebugChar((char) c);
 			ret = ret + String.valueOf((char) c);
 		}
 		ret = ret + "\n";

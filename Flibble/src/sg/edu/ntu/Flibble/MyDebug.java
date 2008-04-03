@@ -7,4 +7,10 @@ public final class MyDebug {
 			System.out.println(msg);
 		}
 	}
+	public static final void WriteDebugChar(char chr) {
+		if(isWrite>0){
+			System.out.print(chr);
+		}
+	}
+
 }

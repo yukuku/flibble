@@ -59,9 +59,6 @@ public class GameBean {
 	public boolean setUserB(String u) {
 		if(userA.equals("")!=true){
 			userB = u;
-			curTurn = userA;
-			scoreA = scoreB = 0;
-			gstatus = Constant.FL_GSTATUS.PLAYING;
 			return startGame();
 		}
 		else {
@@ -98,6 +95,9 @@ public class GameBean {
 			fmA = FlibbleBridge2.getFlibbleMatrix();
 			fmB = FlibbleBridge2.getFlibbleMatrix();
 			MyDebug.WriteDebug("Initialized fm");
+			curTurn = userA;
+			scoreA = scoreB = 0;
+			gstatus = Constant.FL_GSTATUS.PLAYING;
 			return true;
 		}
 		catch (IOException ex){
@@ -177,5 +177,9 @@ public class GameBean {
 	
 	public boolean getCorrect(){
 		return correct;
+	}
+	
+	public Constant.FL_GSTATUS getGameStatus() {
+		return gstatus;
 	}
 }
