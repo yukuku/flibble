@@ -68,7 +68,8 @@ public class FlibbleBridge2 {
 		DOMParser parser = new DOMParser();
 //		InputStream in = getFlickImgs();
 //		parser.parse(new InputSource(in));
-		String in = getFlickImgs2();
+//		String in = getFlickImgs2();
+		String in = getFlickImgs3();
 		parser.parse(new InputSource(new StringReader(in)));
 		Document doc = parser.getDocument();
 		nodes = doc.getElementsByTagName("photo");
@@ -89,6 +90,36 @@ public class FlibbleBridge2 {
 
 	public static String getFlickImgs2() throws IOException {
 		String url = Constant.Application.flickrConnString + "&" + Constant.Application.flickrApiKey + "=" + Constant.properties.getProperty("FlibbleDefaultApiKey")
+		+ "&" + Constant.Application.flickrExtras + "=" + Constant.properties.getProperty("FlibbleDefaultExtras") + "&" + Constant.Application.flickrPerPage
+		+ "=" + (Math.pow(Integer.parseInt(Constant.properties.getProperty("FlibbleDefaultMatrixSize")), 2) * 2) + "&" 
+		+ Constant.Application.flickrPage + "=" + Constant.pageNumber;
+		if (Constant.pageNumber < Constant.pageNumberMax) {
+			Constant.pageNumber++;
+		}
+		else {
+			Constant.pageNumber = 1;
+		}
+
+		HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+		String ret = "";
+		//---Test
+		InputStreamReader in2 = new InputStreamReader(con.getInputStream(), "utf-8");
+		while (true) {
+			int c = in2.read();
+			if (c < 0)
+				break;
+			MyDebug.WriteDebugChar((char) c);
+			ret = ret + String.valueOf((char) c);
+		}
+		ret = ret + "\n";
+
+		con.disconnect();
+		return ret;
+	}
+
+
+	public static String getFlickImgs3() throws IOException {
+		String url = Constant.Application.flickrConnStringIntest + "&" + Constant.Application.flickrApiKey + "=" + Constant.properties.getProperty("FlibbleDefaultApiKey")
 		+ "&" + Constant.Application.flickrExtras + "=" + Constant.properties.getProperty("FlibbleDefaultExtras") + "&" + Constant.Application.flickrPerPage
 		+ "=" + (Math.pow(Integer.parseInt(Constant.properties.getProperty("FlibbleDefaultMatrixSize")), 2) * 2) + "&" 
 		+ Constant.Application.flickrPage + "=" + Constant.pageNumber;

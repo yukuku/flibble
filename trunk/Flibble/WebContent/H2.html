@@ -161,6 +161,7 @@ panelProgress.render();
         				$('mq').style.backgroundImage = '';
         				// clr text
         				$(id).update('');
+        				        				
         			} else {
         				// put hint
         				$('mh').update("Your guess is wrong!<br/>Now send an image to your opponent.");
@@ -388,6 +389,7 @@ function mainloop() {
 							YAHOO.util.Dom.setXY(abc, YAHOO.util.Dom.get(game.lastSent).startPos);
 						}
 					}
+
 					game.state = 8;
 				}
 			});
