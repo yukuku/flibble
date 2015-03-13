@@ -1,0 +1,56 @@
+## Server's turn ##
+
+There are 4 turns:
+  * Aguess // A's turn to guess a pic
+  * Asend // A's turn to select a pic to send to B
+  * Bguess
+  * Bsend
+
+Transitions:
+
+```
+                    A++
+     +---------------------------------+
+     ↓                                |
+  Asend ---> Bguess ---> Bsend ---> Aguess
+     ↑         |   B++     ↑         |
+     +----------+           +----------+
+         wrong                 wrong
+```
+
+## Client's turn ##
+
+Client only see turns called meGuess, meSend, youGuess, and youSend, not A or B.
+
+### Additional turn data ###
+
+  * meSend: imgSet, tagSet     -> send imgIndex 1..9 (which image to send)
+  * meGuess: imgGuess, tagSet  -> send tagIndex 1..9 (which tags is guessed)
+
+  * imgSet: String url[9](9.md)
+  * tagSet: String[.md](.md) tags[9](9.md)
+  * tags: String tag[9](9.md)
+
+example turn data:
+```
+{
+  turn: "meSend",
+  imgSet: [
+    "http://flickr.com/whatever/1",
+    "http://flickr.com/whatever/2",
+    "http://flickr.com/whatever/3",
+    "http://flickr.com/whatever/4",
+    "http://flickr.com/whatever/5",
+    "http://flickr.com/whatever/6",
+    "http://flickr.com/whatever/7",
+    "http://flickr.com/whatever/8",
+    "http://flickr.com/whatever/9"
+  ],
+  tagSet: [
+    ["boy", "blue"],
+    ["sile", "jere"],
+    // etc
+    ["waku", "girl"]
+  ]
+}
+```

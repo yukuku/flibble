@@ -1,0 +1,18 @@
+## Declarations ##
+
+```
+enum Turn {Aguess, Asend, Bguess, Bsend}
+```
+
+## Variables ##
+
+```
+Turn turn
+String nickA, nickB
+int scoreA, scoreB
+GameImage[9] imgsA, imgsB
+```
+
+## Methods ##
+
+  * {String turn, data} getTurn() // dont know how to describe.....

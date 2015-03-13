@@ -1,0 +1,19 @@
+## onloop ##
+
+```
+
+var state = getState()
+var entered = false
+var confirmed = false
+
+if state == 0 status = "Loading"
+if state == 1 and entered status = "Waiting for other player"
+if state == 1 and not entered if enter() entered = true
+if state == 2 if confirm() confirmed = true
+if state == 3 and confirmed status = "Synchronizing"
+if state == 3 and not confirmed if confirm() confirmed = true
+if state == 4 {
+    P3.hide
+    new LooperH2()
+}
+```
